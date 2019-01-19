@@ -1,0 +1,28 @@
+{
+  "name": "fitbit-os-probe",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@fitbit/sdk": "~3.0.0",
+    "@fitbit/sdk-cli": "^1.5.0"
+  },
+  "fitbit": {
+    "appUUID": "b875eae0-27ae-4895-9b2a-6158712ff1cd",
+    "appType": "app",
+    "appDisplayName": "Msg Probe",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#ffffff",
+    "requestedPermissions": [],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {},
+    "defaultLanguage": "en-US"
+  },
+  "scripts": {
+    "build": "fitbit-build",
+    "debug": "fitbit"
+  }
+}

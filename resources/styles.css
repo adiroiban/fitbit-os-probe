@@ -1,0 +1,10 @@
+#background {
+  viewport-fill: black;
+}
+
+#output {
+  fill: white;
+  font-size: 30;
+  font-family: System-Regular;
+  text-length: 500;
+}
