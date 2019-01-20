@@ -11,7 +11,7 @@ const REFRESH = 1 * 1000
 // Number of seconds at which to send pings.
 const RESOLUTION = 4 * 1000
 // Time when socket state was changed.
-let state_changed = 0
+let state_changed = new Date().getTime()
 // Open or Close state of the socket.
 let state = 'C'
 // Time when last message was received.
@@ -91,11 +91,7 @@ function showResults() {
   // Show output.
   let now = new Date().getTime()
   let state_duration
-  if (state_changed > 0) {
-    state_duration = Math.round((now - state_changed) / 1000)
-  } else {
-    state_duration = -1
-  }
+  let state_duration = Math.round((now - state_changed) / 1000)
   let message_duration
   if (last_received > 0) {
     message_duration = Math.round((now - last_received) / 1000)
