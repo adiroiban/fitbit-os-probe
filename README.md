@@ -29,6 +29,10 @@ Legend:
 
 * Time since last onopne/onclose event was received.
 
+Each line shows the round-trip for a message.
+If the connection was closed when a message was sent,
+it shows for how long the connection was closed when
+the message was closed.
 
 ![screenshot](screenshot.png?raw=true "App screenshot")
 

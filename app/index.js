@@ -112,11 +112,17 @@ function showResults() {
   past.forEach(function(request) {
     let duration
     if (request[2] == -1) {
-        duration = 'sent-not-received'
+        duration = 'waiting for reply'
     } else if (request[2] == -2) {
         duration = 'not-sent-error'
     } else if (request[2] == -3) {
-        duration = 'not-sent-closed'
+        let close_duration = request[3]
+        if (!close_duration) {
+            close_duration = now - state_changed
+            request[3] = close_duration
+        }
+
+        duration = 'closed ' + close_duration + 'ms'
     } else {
         duration = request[2] + 'ms'
     }
