@@ -14,6 +14,7 @@ const LINES = 9
 // How often to display the results.
 const REFRESH = 1 * 1000
 // Number of seconds at which to send pings.
+// This can be changed at run-time via settings.
 const RESOLUTION = 4 * 1000
 // Time when socket state was changed.
 let state_changed = new Date().getTime()
@@ -28,11 +29,10 @@ let current = 0
 // List of past pings.
 let past = []
 // Element where to show the messages.
-let demotext = document.getElementById('output');
+let demotext = document.getElementById('output')
 
-
-setInterval(showResults, REFRESH);
-setInterval(sendPing, RESOLUTION);
+setInterval(showResults, REFRESH)
+let ping_call = setInterval(sendPing, RESOLUTION)
 
 // Listen for the onopen event
 messaging.peerSocket.onopen = function() {
@@ -45,16 +45,33 @@ messaging.peerSocket.onclose = function() {
   state_changed = new Date().getTime()
 }
 
+/*
+Called when a message was received from companion.
+
+Check companion docs for available message types.
+*/
 messaging.peerSocket.onmessage = function(evt) {
-  // Output the message to the console
-  let response = evt.data
-  let now = new Date().getTime()
-  last_received = now
-  past.forEach(function(request) {
-   if (response[0] == request[0]) {
-     request[2] = now - request[1]
-   }
-  })
+    let message = evt.data
+    if (message.type == 'response') {
+        let response = message.payload
+        let now = new Date().getTime()
+        last_received = now
+        past.forEach(function(request) {
+            if (response[0] == request[0]) {
+                request[2] = now - request[1]
+            }
+        })
+        return
+    }
+
+    if (message.type == 'settings') {
+        let settings = message.payload
+        if (settings.key == 'resolution') {
+            clearInterval(ping_call)
+            ping_call = setInterval(sendPing, settings.newValue * 1000)
+        }
+    }
+
 }
 
 messaging.peerSocket.onerror = function(err) {
@@ -62,9 +79,10 @@ messaging.peerSocket.onerror = function(err) {
   state = err.code + "-" + err.message
 }
 
-// Send a message to the peer
+/*
+ Send a message to the companion.
+*/
 function sendPing() {
-
   let now = new Date().getTime()
   // record new ping
   current = current + 1
@@ -92,8 +110,11 @@ function sendPing() {
   }
 }
 
+
+/*
+Display status on the screen.
+*/
 function showResults() {
-  // Show output.
   let now = new Date().getTime()
   let state_duration
   let state_duration = Math.round((now - state_changed) / 1000)
@@ -131,5 +152,4 @@ function showResults() {
   demotext.text = output.join('\n')
 
 }
-
 

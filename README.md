@@ -7,7 +7,10 @@ A simple app to ping the companion and show communication status.
 This app will send a message to the companion and will wait for the response,
 measuring the round-trip time.
 
-It also shows the followings:
+There is a settings page, with the purpose to observe how the companion
+is launched.
+
+It shows the followings:
 
 * state of the peer socket
 * the time since last message was received from companion (-1 when not yet received)
