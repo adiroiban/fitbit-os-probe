@@ -4,6 +4,11 @@
 import document from "document";
 import * as messaging from "messaging";
 
+// Status codes
+// * -1 reply not yet received
+// * -2 failure during send
+// * -3 request never sent
+
 // Number of lines to display
 const LINES = 9
 // How often to display the results.
@@ -74,11 +79,11 @@ function sendPing() {
       status = 'rs:O'
     } catch (error) {
       status = error
-      last_message[2] = 'error'
+      last_message[2] = '-2'
     }
   } else {
     status = "rs:C"
-    last_message[2] = 'not sent'
+    last_message[2] = '-3'
   }
 
   // Remove old entries.
@@ -98,9 +103,24 @@ function showResults() {
   } else {
     message_duration = -1
   }
-  let output = [status + ' ' + message_duration + 's | ' + state + ' ' + state_duration +'s']
+
+  let output = [
+    status + ' ' + message_duration + 's | ' +
+    state + ' ' + state_duration +'s'
+    ]
+
   past.forEach(function(request) {
-    output.push('R ' + request[0] + " " + request[2] + 'ms')
+    let duration
+    if (request[2] == -1) {
+        duration = 'sent-not-received'
+    } else if (request[2] == -2) {
+        duration = 'not-sent-error'
+    } else if (request[2] == -3) {
+        duration = 'not-sent-closed'
+    } else {
+        duration = request[2] + 'ms'
+    }
+    output.push('R ' + request[0] + " " + duration)
   })
   demotext.text = output.join('\n')
 

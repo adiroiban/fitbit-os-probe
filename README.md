@@ -13,6 +13,13 @@ It also shows the followings:
 * the time since socket state was changed (open or close, -1 when not yet opened)
 
 
+## Screenshot
+
+Main app page with tasks list for a section.
+
+![screenshot](screenshot.png?raw=true "App screenshot")
+
+
 ## Development
 
 * npx fibit
