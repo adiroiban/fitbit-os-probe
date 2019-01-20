@@ -118,15 +118,15 @@ function showResults() {
     } else if (request[2] == -3) {
         let close_duration = request[3]
         if (!close_duration) {
-            close_duration = now - state_changed
+            close_duration = Math.round((now - state_changed) / 1000)
             request[3] = close_duration
         }
 
-        duration = 'closed ' + close_duration + 'ms'
+        duration = 'C ' + close_duration + 's'
     } else {
         duration = request[2] + 'ms'
     }
-    output.push('R ' + request[0] + " " + duration)
+    output.push(request[0] + " " + duration)
   })
   demotext.text = output.join('\n')
 
