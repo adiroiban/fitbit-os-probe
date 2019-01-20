@@ -6,6 +6,8 @@ import * as messaging from "messaging";
 
 // Number of lines to display
 const LINES = 9
+// How often to display the results.
+const REFRESH = 1 * 1000
 // Number of seconds at which to send pings.
 const RESOLUTION = 4 * 1000
 // Time when socket state was changed.
@@ -24,6 +26,7 @@ let past = []
 let demotext = document.getElementById('output');
 
 
+setInterval(showResults, REFRESH);
 setInterval(sendPing, RESOLUTION);
 
 // Listen for the onopen event
@@ -82,8 +85,11 @@ function sendPing() {
   if (past.length > LINES) {
     past = past.slice((past.length - LINES), past.length)
   }
+}
 
+function showResults() {
   // Show output.
+  let now = new Date().getTime()
   let state_duration
   if (state_changed > 0) {
     state_duration = Math.round((now - state_changed) / 1000)
