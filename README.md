@@ -2,6 +2,8 @@
 
 A simple app to ping the companion and show communication status.
 
+[Link to private App Gallery](https://gam.fitbit.com/gallery/app/b875eae0-27ae-4895-9b2a-6158712ff1cd)
+
 This app will send a message to the companion and will wait for the response,
 measuring the round-trip time.
 
