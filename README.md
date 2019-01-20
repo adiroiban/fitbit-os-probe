@@ -17,6 +17,19 @@ It also shows the followings:
 
 Main app page with tasks list for a section.
 
+Legend:
+
+* rs:O - peerSocket.readyState.OPEN
+* rs:C - peerSocket.readyState.CLOSED
+
+* Time since last message was received
+
+* ps:O - peerSocket.onopen
+* ps:C - peerSocket.onclose
+
+* Time since last onopne/onclose event was received.
+
+
 ![screenshot](screenshot.png?raw=true "App screenshot")
 
 
