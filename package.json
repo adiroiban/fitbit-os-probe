@@ -1,8 +1,8 @@
 {
   "name": "fitbit-os-probe",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "@fitbit/sdk": "~3.0.0",
     "@fitbit/sdk-cli": "^1.5.0"
