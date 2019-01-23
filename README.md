@@ -13,31 +13,20 @@ is launched.
 It shows the followings:
 
 * state of the peer socket
-* the time since last message was received from companion (-1 when not yet received)
-* onopen/onclose state
 * the time since socket state was changed (open or close, -1 when not yet opened)
+* Each line shows the round-trip for a message... or if waiting for response.
+* For ping sends while socket is closed, time since socket was closed.
+
+Available vibrations:
+
+* `confirmation` - single vibration - on connection open.
+* `nudge` - double vibration - on connection closed.
+* `bump` - short vibration - on app exit.
 
 
 ## Screenshot
 
 Main app page with tasks list for a section.
-
-Legend:
-
-* rs:O - peerSocket.readyState.OPEN
-* rs:C - peerSocket.readyState.CLOSED
-
-* Time since last message was received
-
-* ps:O - peerSocket.onopen
-* ps:C - peerSocket.onclose
-
-* Time since last onopne/onclose event was received.
-
-Each line shows the round-trip for a message.
-If the connection was closed when a message was sent,
-it shows for how long the connection was closed when
-the message was closed.
 
 ![screenshot](screenshot.png?raw=true "App screenshot")
 
